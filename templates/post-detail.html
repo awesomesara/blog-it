@@ -10,10 +10,12 @@
 
         <article class="row entry format-standard" >
 
-            <div class="entry__media col-full " >
-                <div class="entry__post-thumb" >
+
+
+            <div class="entry__media col-full " style="margin: center !important;" >
+                <div class="entry__post-thumb" style="margin: center !important;">
                    {% for i in post.get_image_all %}
-                    <img src="{{ post.get_image }}" srcset="{{ i }}" style="margin-bottom: 5%; width: 600px !important; height: 500px !important; text-align: center !important;" alt="нет картинки((">
+                    <img src="{{ post.get_image }}" srcset="{{ i }}" style="margin: center !important; width: 800px !important; height: 500px !important; text-align: center !important;" alt="нет картинки((">
                     {% endfor %}
                 </div>
             </div>
@@ -22,18 +24,28 @@
             </div> <!-- s-entry__main -->
             {% if request.user.is_authenticated %}
 
-                {% if is_favourite %}
-                <a href="{% url 'favourite_post' pk=post.id %}"><i class="fas fa-bookmark"></i></a>
+                {% if not is_favourite %}
+                <a style="margin-right:20px;" href="{% url 'favourite_post' pk=post.id %}"><i class="far fa-bookmark"></i></a>
+                {% else %}
+                <a style="margin-right:20px;" href="{% url 'favourite_post' pk=post.id %}"><i class="fas fa-bookmark"></i></a>
+                {% endif %}
+
+            {%endif%}
+
+            {% if request.user.is_authenticated %}
+
+                {% if is_likes %}
+                <a style="margin-right:20px;" href="{% url 'likes_post' pk=post.id %}">0 {{ like_post }}</i></a>
                  {% else %}
-                <a href="{% url 'favourite_post' pk=post.id %}"><i class="far fa-bookmark"></i></a>
+                <a style="margin-right:20px;" href="{% url 'likes_post' pk=post.id %}">00 {{like_post}}</i></a>
                 {% endif %}
 
             {%endif%}
 
 
             {% if request.user == post.user %}
-            <a href="{% url 'delete-post' post.id %}"><i class="fas fa-trash-alt fa-lg"></i></a>
-            <a href="{% url 'update-post' post.id %}"><i class="fas fa-edit"></i></a>
+            <a style="margin-right:20px;" href="{% url 'delete-post' post.id %}"><i class="fas fa-trash-alt fa-lg"></i></a>
+            <a style="margin-right:20px;" href="{% url 'update-post' post.id %}"><i class="fas fa-edit"></i></a>
             {% endif%}
 
             <div class="entry__header col-full">
@@ -49,9 +61,9 @@
                 </ul>
             </div>
 
-            <div class="col-full entry__main">
+            <div class="col-full entry__main" style="border-style: solid">
 
-                <p class="lead drop-cap">{{ post.description }}</p>
+                <p class="lead drop-cap" style="margin-top:30px; margin-bottom:60px;">{{ post.description }}</p>
 
 
             </div> <!-- s-entry__main -->
@@ -62,14 +74,19 @@
 
                     <!-- START commentlist -->
                     <ol class="commentlist">
-{% for i in comment %}
-                        <li class="depth-1 comment">
+                        <h1 style="text-align: center; margin-bottom: 50px;" class="display-1 display-1--with-line-sep">Comments:</h1>
 
-<!--                            <div class="comment__avatar">-->
-<!--                                <img class="avatar" src="images/avatars/user-01.jpg" alt="" width="50" height="50">-->
-<!--                            </div>-->
 
-                            <div class="comment__content">
+                        {% for i in comment %}
+                        <li class="depth-1 comment" >
+
+                            {% if request.user.is_authenticated.image.url %}
+                            <div class="comment__avatar">
+                                <img class="avatar" src="{{i.user.image.url}}" alt="" width="50" height="50">
+                            </div>
+                            {% endif %}
+
+                            <div class="comment__content" style="margin-right: 170px;">
 
                                 <div class="comment__info">
                                     <div class="comment__author">{{ i.user }}</div>
@@ -106,10 +123,8 @@
 
         <div class="row narrow">
             <div class="col-full s-content__header">
-                <h1 class="display-1 display-1--with-line-sep">Add comments</h1>
-                <p class="lead">
-                    If you want, you can add your comment in our post!
-                </p>
+                <h1 class="display-1 display-1--with-line-sep">Add comments:</h1>
+
             </div>
         </div>
      {% if request.user.is_authenticated %}

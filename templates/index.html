@@ -15,7 +15,7 @@
 
                             <div class="entry__background" style="background-image:url({% static 'images/it.jpeg'%});"></div>
 
-                            <div class="entry__content">
+                            <div class="entry__content" >
                                 <span class="entry__category"><a href="#0">IT</a></span>
 
                                 <h1><a href="#0" title="">"It's better to invent tomorrow than worry about yesterday being so-so."»</a></h1>
@@ -98,15 +98,14 @@
     <!-- s-content
     ================================================== -->
     <section class="s-content">
-
         <div style="display: flex !important; justify-content: center" class="row entries-wrap wide">
             <div class="entries" style="display: flex !important;">
                 <article class="col-block" style="padding-right: 0 !important;">
                     {% for post in page_obj%}
-                    <div class="item-entry" data-aos="zoom-in" style="width: 600px !important; height: 650px !important; margin-top: 30px; display: flex; align-items: center; flex-direction: column ">
-                        <div class="item-entry__thumb" style="width: 300px !important; height: 300px !important;">
+                    <div class="item-entry" data-aos="zoom-in" style="width: 500px !important; height: 650px !important; margin-top: 30px; display: flex; align-items: center; flex-direction: column ">
+                        <div class="item-entry__thumb" style="width: auto !important; height: auto !important;">
                             <a href="{% url 'detail' post.id %}" class="item-entry__thumb-link">
-                                <img style="margin-top: 70px" src="{{ post.get_image }}"
+                                <img  src="{{ post.get_image }}"
                                      srcset="{{ post.get_image }}" alt="">
                             </a>
                         </div>

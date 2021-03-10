@@ -1,33 +1,33 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<section class="s-content s-content--top-padding">
 
-        <div class="row narrow">
-            <div class="col-full s-content__header" data-aos="fade-up">
-                <h1 class="display-1 display-1--with-line-sep">Search results: </h1>
-                <p class="lead">Dolor similique vitae. Exercitationem quidem occaecati iusto. Id non vitae enim quas error dolor maiores ut. Exercitationem earum ut repudiandae optio veritatis animi nulla qui dolores.</p>
+<section class="s-content" >
+
+    <div class="row narrow">
+            <div class="col-full s-content__header">
+                <h1 class="display-1 display-1--with-line-sep" style="margin-top: 100px;">Search result: </h1>
             </div>
         </div>
 
-            <div class="entries">
-
+        <div style="display: flex !important; justify-content: center" class="row entries-wrap wide">
+            <div class="entries" style="display: flex !important;">
                 <article class="col-block" style="padding-right: 0 !important;">
-                    {% for post in posts%}
-                    <div class="item-entry" data-aos="zoom-in" style="width: 500px !important; height: 500px !important; margin-right: 40% !important;">
+                    {% for post in posts %}
+                    <div class="item-entry" data-aos="zoom-in" style="width: 600px !important; height: 650px !important; margin-top: 30px; display: flex; align-items: center; flex-direction: column ">
                         <div class="item-entry__thumb" style="width: 300px !important; height: 300px !important;">
-                            <a href="single-standard.html" class="item-entry__thumb-link">
-                                <img src="{{ post.get_image }}"
+                            <a href="{% url 'detail' post.id %}" class="item-entry__thumb-link">
+                                <img style="margin-top: 70px" src="{{ post.get_image }}"
                                      srcset="{{ post.get_image }}" alt="">
                             </a>
                         </div>
 
                         <div class="item-entry__text">
                             <div class="item-entry__cat">
-                                <a href="{% url 'detail' post.id %}">{{ post }}</a>
+                                <a href="{% url 'detail' post.id %}"><h2>{{ post }}</h2></a>
                             </div>
 
-<!--                            <h1 class="item-entry__title"><a href="single-standard.html"></a></h1>-->
+                            <p class="item-entry__title">{{ post.description|truncatewords:10}}</p>
 
                             <div class="item-entry__date">
                                 <a href="single-standard.html">{{ post.created }}</a>
@@ -36,8 +36,6 @@
                     </div> <!-- item-entry -->
                     {% endfor %}
                 </article> <!-- end article -->
-
-
 
             </div> <!-- end entries -->
         </div> <!-- end entries-wrap -->
@@ -59,5 +57,49 @@
 <!--        </div>-->
 
     </section> <!-- end s-content -->
+
+<!--<section class="s-content s-content&#45;&#45;top-padding">-->
+
+<!--        <div class="row narrow">-->
+<!--            <div class="col-full s-content__header" data-aos="fade-up">-->
+<!--                <h1 class="display-1 display-1&#45;&#45;with-line-sep">Search results: </h1>-->
+<!--                <p class="lead">Dolor similique vitae. Exercitationem quidem occaecati iusto. Id non vitae enim quas error dolor maiores ut. Exercitationem earum ut repudiandae optio veritatis animi nulla qui dolores.</p>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--            <div class="entries">-->
+
+<!--                <article class="col-block" style="padding-right: 0 !important;">-->
+<!--                    {% for post in posts%}-->
+<!--                    <div class="item-entry" data-aos="zoom-in" style="width: 500px !important; height: 500px !important; margin-right: 40% !important;">-->
+<!--                        <div class="item-entry__thumb" style="width: 300px !important; height: 300px !important;">-->
+<!--                            <a href="single-standard.html" class="item-entry__thumb-link">-->
+<!--                                <img src="{{ post.get_image }}"-->
+<!--                                     srcset="{{ post.get_image }}" alt="">-->
+<!--                            </a>-->
+<!--                        </div>-->
+
+<!--                        <div class="item-entry__text">-->
+<!--                            <div class="item-entry__cat">-->
+<!--                                <a href="{% url 'detail' post.id %}">{{ post }}</a>-->
+<!--                            </div>-->
+
+<!--&lt;!&ndash;                            <h1 class="item-entry__title"><a href="single-standard.html"></a></h1>&ndash;&gt;-->
+
+<!--                            <div class="item-entry__date">-->
+<!--                                <a href="single-standard.html">{{ post.created }}</a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div> &lt;!&ndash; item-entry &ndash;&gt;-->
+<!--                    {% endfor %}-->
+<!--                </article> &lt;!&ndash; end article &ndash;&gt;-->
+
+
+
+<!--            </div> &lt;!&ndash; end entries &ndash;&gt;-->
+<!--        </div> &lt;!&ndash; end entries-wrap &ndash;&gt;-->
+
+
+<!--    </section> &lt;!&ndash; end s-content &ndash;&gt;-->
 {% endblock %}
 

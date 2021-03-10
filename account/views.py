@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.views.generic.base import View
 
+from main.models import Post
 from .forms import RegistrationForm
 
 
@@ -40,6 +41,9 @@ class SigninView(LoginView):
 def profile(request):
     return render(request, 'account/account.html')
 
+def post_by_user(request):
+    post = Post.objects.filter(user=request.user)
+    return render(request, 'account/account.html', {'post': post})
 
 
 

@@ -1,4 +1,6 @@
 from django.db import models
+from django.shortcuts import render
+
 from account.models import User
 from django.urls import reverse_lazy
 

@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-<section class="s-content s-content--top-padding">
+<section class="s-content s-content--top-padding" >
 
         <div style="display: flex !important; justify-content: center ;"  class="row narrow">
             <div class="col-full s-content__header" data-aos="fade-up">
@@ -21,11 +21,10 @@
 
              {% if not category.get_children %}
               <div class="entries">
-
                     {% for post in posts%}
-                    <div class="item-entry" data-aos="zoom-in" style="margin-right:80px !important; margin-top: 80px">
-                        <div class="item-entry__thumb" style="width: 300px !important; height: 300px !important;">
-                            <a href="{% url 'detail' post.id%}" class="item-entry__thumb-link">
+                    <div class="item-entry" data-aos="zoom-in" style="margin-right:70px !important; margin-top: 80px;width: 500px !important; height: 700px !important;">
+                        <div class="item-entry__thumb" style="width: auto !important; height: auto !important;">
+                            <a href="{% url 'detail' post.id %}" class="item-entry__thumb-link">
                                 <img src="{{ post.get_image }}"
                                      srcset="{{ post.get_image }}" alt="">
                             </a>

@@ -6,16 +6,55 @@
         <div class="row narrow">
             <div class="col-full s-content__header">
                 <h1 class="display-1 display-1--with-line-sep">Account</h1>
-                <p class="lead"> Ваша страничка
-                </p>
+                    <img src="{{ request.user.get_image_url }}" class="img-thumbnail" alt="...">
+                <h3 style="margin-top:40px;" class="display-1 display-1--with-line-sep">Name : {{request.user.name}}</h3>
+                <h3 class="display-1 display-1--with-line-sep">Last name : {{request.user.last_name}}</h3>
+                <h3 class="display-1 display-1--with-line-sep">Email : {{request.user.email}}</h3>
+
             </div>
         </div>
 
-<h1>Имя - {{request.user.name}}</h1>
-<h1>Фамилия - {{request.user.last_name}}</h1>
 
 
 
+<section class="s-content s-content--top-padding" >
+
+<div class="row narrow">
+            <div class="col-full s-content__header">
+                <h1 style="margin-top: -90px;" class="display-1 display-1--with-line-sep">Your posts:</h1>
+
+            </div>
+        </div>
+
+<article class="blog_item" >
+
+              <div class="entries">
+                    {% for post in post%}
+                    <div class="item-entry" data-aos="zoom-in" style="margin-right:70px !important; margin-top: 80px;width: 500px !important; height: 700px !important;">
+                        <div class="item-entry__thumb" style="width: auto !important; height: auto !important;">
+                            <a href="{% url 'detail' post.id %}" class="item-entry__thumb-link">
+                                <img src="{{ post.get_image }}"
+                                     srcset="{{ post.get_image }}" alt="">
+                            </a>
+                        </div>
+
+                        <div class="item-entry__text">
+                            <div class="item-entry__cat">
+                                <a href="{% url 'detail' post.id %}"><h2>{{ post }}</h2></a>
+                            </div>
+
+                            <p class="item-entry__title">{{ post.description|truncatewords:10}}</p>
+
+                            <div class="item-entry__date">
+                                <a href="single-standard.html">{{ post.created }}</a>
+                            </div>
+                        </div>
+                    </div> <!-- item-entry -->
+                    {% endfor %}
+                </article> <!-- end article -->
+
+
+</section>
 
 </section> <!-- end s-content -->
 

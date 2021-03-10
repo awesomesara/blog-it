@@ -151,6 +151,10 @@ def post_detail(request, year, month, day, post):
     if post.favourite.filter(pk=request.user.id).exists():
         is_favourite = True
 
+    is_likes = False
+    if post.likes.filter(pk=request.user.id).exist():
+        is_likes = True
+
 
     if request.method == 'POST':
         comment_form = CommentForm(data=request.POST)
@@ -164,6 +168,7 @@ def post_detail(request, year, month, day, post):
                   'post-detail.html',
                  {'post': post,
                   'is_favourite': is_favourite,
+                  'is_likes': is_likes,
                   'comments': comments,
                   'comment_form': comment_form})
 
@@ -182,4 +187,25 @@ def favourite_post(request, pk):
     else:
         post.favourite.add(request.user)
     return HttpResponseRedirect(post.get_absolute_url())
+
+
+def likes_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if post.favourite.filter(pk=request.user):
+        post.likes.add(request.user)
+    # post = Post.objects.get(pk=pk)
+    like_post = len(post.likes.all())
+    context = {
+        'like_post': like_post
+    }
+    return HttpResponseRedirect(post.get_absolute_url(), context)
+
+
+# def likes_post(request, pk):
+#     post = get_object_or_404(Post, pk=pk)
+#     if post.likes.filter(pk=request.user).exists():
+#         post.likes.remove(request.user)
+#     else:
+#         post.likes.add(request.user)
+#     return HttpResponseRedirect(post.get_absolute_url())
 

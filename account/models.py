@@ -33,11 +33,17 @@ class User(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     activation_code = models.CharField(max_length=15, blank=True)
+    image = models.ImageField(upload_to='post', blank=True, null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     objects = UserManager()
+
+    def get_image_url(self):
+        if self.image:
+            return self.image.url
+        return ''
 
     @property
     def get_all(self):
